@@ -168,6 +168,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <CartJoint>k__BackingField: {fileID: 8714833846848856933}
   <AnswerPlacePoint>k__BackingField: {fileID: 2786327646646438729}
+  _renderers:
+  - {fileID: 2360089228384466934}
+  - {fileID: 2279607987089782032}
+  - {fileID: 377203515529998241}
 --- !u!114 &3945727075636220104
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -521,7 +525,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &3692474209425188882
 RectTransform:
   m_ObjectHideFlags: 0

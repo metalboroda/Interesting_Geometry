@@ -17,6 +17,7 @@ namespace Assets.__Game.Resources.Scripts.Train
     [SerializeField] private CartItem[] _answers;
     [Header("Tutorial")]
     [SerializeField] private bool _tutorial;
+    [SerializeField] private Transform _tutorialPoint;
     [SerializeField] private GameObject _tutorialFinger;
 
     private readonly List<CartHandler> _spawnedCartHandlers = new List<CartHandler>();
@@ -62,6 +63,8 @@ namespace Assets.__Game.Resources.Scripts.Train
       for (int i = 0; i < _answers.Length; i++)
       {
         spawnedCart = Instantiate(_cartPrefab, lastCartJoint.position, Quaternion.Euler(0, 90, 0), transform);
+
+        spawnedCart.DisableVisual();
         _spawnedCartHandlers.Add(spawnedCart);
 
         lastCartJoint = spawnedCart.CartJoint;
@@ -71,6 +74,7 @@ namespace Assets.__Game.Resources.Scripts.Train
           spawnedCart.AnswerPlacePoint.rotation, spawnedCart.AnswerPlacePoint);
 
         spawnedAnswer.SetSpriteAndImage(_answers[i].AnswerSprite);
+        spawnedAnswer.DisableVisual();
       }
     }
 
@@ -85,7 +89,7 @@ namespace Assets.__Game.Resources.Scripts.Train
         _spawnedCartHandlers[0].transform.position.y + 0.75f, 0f);
 
       _spawnedTutorialFinger = Instantiate(
-        _tutorialFinger, startPosition, Quaternion.identity);
+        _tutorialFinger, _tutorialPoint.position, Quaternion.identity);
 
       _spawnedTutorialFinger.transform.DOMove(_variantBoard.GetLastVariantObjectTransform().position, 1.5f)
         .SetLoops(-1)

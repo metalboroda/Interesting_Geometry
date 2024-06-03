@@ -16,12 +16,19 @@ namespace Assets.__Game.Resources.Scripts.Train
     private bool _placed = false;
 
     private Camera _mainCamera;
+    private BoxCollider _boxCollider;
 
     void Awake()
     {
       _mainCamera = Camera.main;
+      _boxCollider = GetComponent<BoxCollider>();
 
       _initLocalPosition = transform.localPosition;
+    }
+
+    private void Start()
+    {
+      SetSpriteAndImage(_image.sprite);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -35,6 +42,13 @@ namespace Assets.__Game.Resources.Scripts.Train
           _placed = true;
         }
       }
+    }
+
+    public void DisableVisual()
+    {
+      _boxCollider.enabled = false;
+
+      _image.gameObject.SetActive(false);
     }
 
     public void SetSpriteAndImage(Sprite sprite)
