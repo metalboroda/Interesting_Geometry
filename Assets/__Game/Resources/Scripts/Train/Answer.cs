@@ -8,6 +8,9 @@ namespace Assets.__Game.Resources.Scripts.Train
   public class Answer : MonoBehaviour, IPointerDownHandler, IDragHandler, IPointerUpHandler
   {
     [SerializeField] public Image _image;
+    [Header("Books")]
+    [SerializeField] private bool _spawnBook = false;
+    [SerializeField] private GameObject[] _booksToSpawn;
 
     public Sprite AnswerSprite { get; private set; }
 
@@ -30,10 +33,15 @@ namespace Assets.__Game.Resources.Scripts.Train
     private void Start()
     {
       SetSpriteAndImage(_image.sprite);
+
+      if (_spawnBook == true)
+        Instantiate(_booksToSpawn[Random.Range(0, _booksToSpawn.Length)], transform);
     }
 
     private void OnTriggerEnter(Collider other)
     {
+      if (_placed) return;
+
       if (other.TryGetComponent(out Variant.Variant variant))
       {
         if (variant.ShowSprite == false)
