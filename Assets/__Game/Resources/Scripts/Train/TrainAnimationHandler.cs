@@ -1,5 +1,6 @@
 using __Game.Resources.Scripts.EventBus;
-using DG.Tweening;
+using Assets.__Game.Resources.Scripts.Character;
+using System.Collections;
 using UnityEngine;
 
 namespace Assets.__Game.Resources.Scripts.Train
@@ -7,79 +8,69 @@ namespace Assets.__Game.Resources.Scripts.Train
   public class TrainAnimationHandler : MonoBehaviour
   {
     [Header("Train")]
-    [SerializeField] private float _trainMovementSpeed;
+    [SerializeField] private float _trainMovementDuration;
     [SerializeField] private Vector3 _trainFirstPoint;
     [SerializeField] private Vector3 _trainSecondPoint;
-    [Header("Wheels")]
-    [SerializeField] private float _wheelsRotationSpeed;
-    [SerializeField] private Vector3 _wheelsRotationDirection;
-    [Space]
-    [SerializeField] private GameObject[] _wheels;
+    [Header("")]
+    [SerializeField] private CharacterAnimationHandler _characterAnimationHandler;
 
     private EventBinding<EventStructs.WinEvent> _winEvent;
 
     private void OnEnable()
     {
-      _winEvent = new EventBinding<EventStructs.WinEvent>(MoveTrainToSecondPoin);
+      _winEvent = new EventBinding<EventStructs.WinEvent>(MoveTrainToSecondPoint);
     }
 
     private void OnDisable()
     {
-      _winEvent.Remove(MoveTrainToSecondPoin);
+      _winEvent.Remove(MoveTrainToSecondPoint);
+    }
+
+    private void OnDestroy()
+    {
+      StopAllCoroutines();
     }
 
     private void Start()
     {
       MoveTrainToFirstPoint();
-      RotateWheels(true);
     }
 
     private void MoveTrainToFirstPoint()
     {
       EventBus<EventStructs.TrainMovementEvent>.Raise(new EventStructs.TrainMovementEvent { IsMoving = true });
 
-      transform.DOLocalMove(_trainFirstPoint, _trainMovementSpeed)
-        .SetSpeedBased(true)
-        .OnComplete(() =>
-        {
-          RotateWheels(false);
+      StartCoroutine(MoveTrain(transform.localPosition, _trainFirstPoint, _trainMovementDuration));
 
-          EventBus<EventStructs.TrainMovementEvent>.Raise(new EventStructs.TrainMovementEvent { IsMoving = false });
-        });
+      _characterAnimationHandler.PlayPushMovementAnimation();
     }
 
-    private void MoveTrainToSecondPoin(EventStructs.WinEvent winEvent)
+    private void MoveTrainToSecondPoint(EventStructs.WinEvent winEvent)
     {
       EventBus<EventStructs.TrainMovementEvent>.Raise(new EventStructs.TrainMovementEvent { IsMoving = true });
 
-      transform.DOLocalMove(_trainSecondPoint, _trainMovementSpeed * 1.5f)
-        .SetSpeedBased(true)
-        .OnComplete(() =>
-        {
-          RotateWheels(false);
+      StartCoroutine(MoveTrain(transform.localPosition, _trainSecondPoint, _trainMovementDuration * 1.5f));
 
-          EventBus<EventStructs.TrainMovementEvent>.Raise(new EventStructs.TrainMovementEvent { IsMoving = false });
-        });
+      _characterAnimationHandler.PlayPushMovementAnimation();
     }
 
-    private void RotateWheels(bool rotate)
+    private IEnumerator MoveTrain(Vector3 start, Vector3 end, float duration)
     {
-      if (rotate == true)
+      float elapsed = 0f;
+
+      while (elapsed < duration)
       {
-        foreach (var wheel in _wheels)
-        {
-          wheel.transform.DOLocalRotate(_wheelsRotationDirection, _wheelsRotationSpeed, RotateMode.FastBeyond360)
-            .SetLoops(-1)
-            .SetSpeedBased(true);
-        }
+        transform.localPosition = Vector3.Lerp(start, end, elapsed / duration);
+        elapsed += Time.deltaTime;
+
+        yield return null;
       }
-      else
-      {
-        foreach (var wheel in _wheels)
-        {
-          DOTween.Kill(wheel.transform);
-        }
-      }
+
+      transform.localPosition = end;
+
+      EventBus<EventStructs.TrainMovementEvent>.Raise(new EventStructs.TrainMovementEvent { IsMoving = false });
+
+      _characterAnimationHandler.PlayIdleAnimation();
     }
   }
 }

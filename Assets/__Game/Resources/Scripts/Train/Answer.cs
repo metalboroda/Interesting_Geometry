@@ -17,6 +17,7 @@ namespace Assets.__Game.Resources.Scripts.Train
 
     private Camera _mainCamera;
     private BoxCollider _boxCollider;
+    private float _zDistanceToCamera;
 
     void Awake()
     {
@@ -59,17 +60,21 @@ namespace Assets.__Game.Resources.Scripts.Train
 
     public void OnPointerDown(PointerEventData eventData)
     {
-      _offset = transform.position - _mainCamera.ScreenToWorldPoint(
-        new Vector3(eventData.position.x, eventData.position.y, 0));
+      Vector3 worldPosition = _mainCamera.ScreenToWorldPoint(
+        new Vector3(eventData.position.x, eventData.position.y, _mainCamera.WorldToScreenPoint(transform.position).z));
+
+      _offset = transform.position - worldPosition;
+      _zDistanceToCamera = _mainCamera.WorldToScreenPoint(transform.position).z;
     }
 
     public void OnDrag(PointerEventData eventData)
     {
       if (_placed == true) return;
 
-      Vector3 newPosition = new Vector3(eventData.position.x, eventData.position.y, 0);
+      Vector3 screenPosition = new Vector3(eventData.position.x, eventData.position.y, _zDistanceToCamera);
+      Vector3 newPosition = _mainCamera.ScreenToWorldPoint(screenPosition) + _offset;
 
-      transform.position = _mainCamera.ScreenToWorldPoint(newPosition) + _offset;
+      transform.position = newPosition;
     }
 
     public void OnPointerUp(PointerEventData eventData)

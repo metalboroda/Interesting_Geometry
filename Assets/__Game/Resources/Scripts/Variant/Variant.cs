@@ -20,6 +20,11 @@ namespace Assets.__Game.Resources.Scripts.Variant
     public Sprite VariantSprite { get; private set; }
     public Sprite ReceivedAnswer { get; private set; }
 
+    private void OnDestroy()
+    {
+      DOTween.Kill(transform);
+    }
+
     public void SetSpriteAndImage(Sprite variantSprite, bool showSprite)
     {
       _variantImage.sprite = null;
