@@ -27,12 +27,14 @@ namespace Assets.__Game.Resources.Scripts.Train
     private VariantBoard _variantBoard;
 
     private EventBinding<EventStructs.ComponentEvent<VariantBoard>> _variantBoardComponentEvent;
+    private EventBinding<EventStructs.CorrectAnswerEvent> _correctAnswerEvent;
     private EventBinding<EventStructs.TrainMovementEvent> _trainMovementEvent;
     private EventBinding<EventStructs.WinEvent> _winEvent;
 
     private void OnEnable()
     {
       _variantBoardComponentEvent = new EventBinding<EventStructs.ComponentEvent<VariantBoard>>(ReceiveVariantBoard);
+      _correctAnswerEvent = new EventBinding<EventStructs.CorrectAnswerEvent>(StopTutorial);
       _trainMovementEvent = new EventBinding<EventStructs.TrainMovementEvent>(Tutorial);
       _winEvent = new EventBinding<EventStructs.WinEvent>(StopTutorial);
     }
@@ -40,6 +42,7 @@ namespace Assets.__Game.Resources.Scripts.Train
     private void OnDisable()
     {
       _variantBoardComponentEvent.Remove(ReceiveVariantBoard);
+      _correctAnswerEvent.Remove(StopTutorial);
       _trainMovementEvent.Remove(Tutorial);
       _winEvent.Remove(StopTutorial);
     }
@@ -92,7 +95,7 @@ namespace Assets.__Game.Resources.Scripts.Train
       _spawnedTutorialFinger = Instantiate(
         _tutorialFinger, _tutorialPoint.position, Quaternion.identity);
 
-      _spawnedTutorialFinger.transform.DOMove(_variantBoard.GetLastVariantObjectTransform().position, 1.5f)
+      _spawnedTutorialFinger.transform.DOMove(_variantBoard.GetFirstVariantObjectTransform().position, 1.5f)
         .SetLoops(-1)
         .SetEase(Ease.InOutQuad);
     }
@@ -101,6 +104,19 @@ namespace Assets.__Game.Resources.Scripts.Train
     {
       if (_tutorial == false) return;
       if (_tutorialPoint == null) return;
+      if (_tutorialCompleted == true) return;
+
+      DOTween.Kill(_spawnedTutorialFinger.transform);
+      Destroy(_spawnedTutorialFinger);
+
+      _tutorialCompleted = true;
+    }
+
+    private void StopTutorial(EventStructs.CorrectAnswerEvent correctAnswerEvent)
+    {
+      if (_tutorial == false) return;
+      if (_tutorialPoint == null) return;
+      if (_tutorialCompleted == true) return;
 
       DOTween.Kill(_spawnedTutorialFinger.transform);
       Destroy(_spawnedTutorialFinger);
