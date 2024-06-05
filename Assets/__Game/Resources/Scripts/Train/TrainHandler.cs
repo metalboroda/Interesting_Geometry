@@ -81,6 +81,7 @@ namespace Assets.__Game.Resources.Scripts.Train
     private void Tutorial(EventStructs.TrainMovementEvent trainMovementEvent)
     {
       if (_tutorial == false) return;
+      if (_tutorialPoint == null) return;
       if (_tutorialCompleted == true) return;
       if (trainMovementEvent.IsMoving == true) return;
 
@@ -99,6 +100,7 @@ namespace Assets.__Game.Resources.Scripts.Train
     private void StopTutorial(EventStructs.WinEvent winEvent)
     {
       if (_tutorial == false) return;
+      if (_tutorialPoint == null) return;
 
       DOTween.Kill(_spawnedTutorialFinger.transform);
       Destroy(_spawnedTutorialFinger);

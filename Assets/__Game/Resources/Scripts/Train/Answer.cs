@@ -60,14 +60,14 @@ namespace Assets.__Game.Resources.Scripts.Train
     public void OnPointerDown(PointerEventData eventData)
     {
       _offset = transform.position - _mainCamera.ScreenToWorldPoint(
-        new Vector3(eventData.position.x, eventData.position.y, transform.position.z));
+        new Vector3(eventData.position.x, eventData.position.y, 0));
     }
 
     public void OnDrag(PointerEventData eventData)
     {
       if (_placed == true) return;
 
-      Vector3 newPosition = new Vector3(eventData.position.x, eventData.position.y, transform.position.z);
+      Vector3 newPosition = new Vector3(eventData.position.x, eventData.position.y, 0);
 
       transform.position = _mainCamera.ScreenToWorldPoint(newPosition) + _offset;
     }
