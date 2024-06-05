@@ -15,10 +15,22 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: 32464a27adf51e2469450cb26fe17659, type: 3}
+    - target: {fileID: 2159685308180856999, guid: a454cc821da5e1b419971d0230763865, type: 3}
+      propertyPath: _sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 04619e420f0cff54e81d274501c5997b, type: 3}
     - target: {fileID: 2284559764423544513, guid: a454cc821da5e1b419971d0230763865, type: 3}
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: 4e4ecdd337254bf44bfe475dd36e6a0a, type: 3}
+    - target: {fileID: 4098001940388029258, guid: a454cc821da5e1b419971d0230763865, type: 3}
+      propertyPath: _sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 4e4ecdd337254bf44bfe475dd36e6a0a, type: 3}
+    - target: {fileID: 4978961884843426869, guid: a454cc821da5e1b419971d0230763865, type: 3}
+      propertyPath: _sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: b202d7be579b3304c82a9b47ea3bff36, type: 3}
     - target: {fileID: 5383494424573651556, guid: a454cc821da5e1b419971d0230763865, type: 3}
       propertyPath: _tutorial
       value: 0
@@ -39,6 +51,10 @@ PrefabInstance:
       propertyPath: _answers.Array.data[3].<AnswerSprite>k__BackingField
       value: 
       objectReference: {fileID: 21300000, guid: 32464a27adf51e2469450cb26fe17659, type: 3}
+    - target: {fileID: 5452168524284780519, guid: a454cc821da5e1b419971d0230763865, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5602689102984901384, guid: a454cc821da5e1b419971d0230763865, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -51,9 +67,45 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: 04619e420f0cff54e81d274501c5997b, type: 3}
+    - target: {fileID: 5627466901229710007, guid: a454cc821da5e1b419971d0230763865, type: 3}
+      propertyPath: _sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 32464a27adf51e2469450cb26fe17659, type: 3}
+    - target: {fileID: 6539528690728712443, guid: a454cc821da5e1b419971d0230763865, type: 3}
+      propertyPath: _sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 04619e420f0cff54e81d274501c5997b, type: 3}
+    - target: {fileID: 6548904862618207829, guid: a454cc821da5e1b419971d0230763865, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 32464a27adf51e2469450cb26fe17659, type: 3}
+    - target: {fileID: 7114039550389931430, guid: a454cc821da5e1b419971d0230763865, type: 3}
+      propertyPath: _variantItems.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7114039550389931430, guid: a454cc821da5e1b419971d0230763865, type: 3}
+      propertyPath: _variantObjects.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7114039550389931430, guid: a454cc821da5e1b419971d0230763865, type: 3}
+      propertyPath: _variantItems.Array.data[0].<VariantSprite>k__BackingField
+      value: 
+      objectReference: {fileID: 21300000, guid: 32464a27adf51e2469450cb26fe17659, type: 3}
+    - target: {fileID: 7114039550389931430, guid: a454cc821da5e1b419971d0230763865, type: 3}
+      propertyPath: _variantItems.Array.data[1].<VariantSprite>k__BackingField
+      value: 
+      objectReference: {fileID: 21300000, guid: 32464a27adf51e2469450cb26fe17659, type: 3}
+    - target: {fileID: 7267297697442673981, guid: a454cc821da5e1b419971d0230763865, type: 3}
+      propertyPath: _sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 32464a27adf51e2469450cb26fe17659, type: 3}
     - target: {fileID: 7942468345822059732, guid: a454cc821da5e1b419971d0230763865, type: 3}
       propertyPath: _maxTime
       value: 18
+      objectReference: {fileID: 0}
+    - target: {fileID: 8276003645217771951, guid: a454cc821da5e1b419971d0230763865, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.25
       objectReference: {fileID: 0}
     - target: {fileID: 8958000384104972398, guid: a454cc821da5e1b419971d0230763865, type: 3}
       propertyPath: m_LocalPosition.x
